@@ -18,14 +18,17 @@ const writeFile = ({path, source}) => {
 csv()
 .fromFile(csvFilePath)
 .on('json', (jsonObj) => {
-  if (jsonObj['zh-TW']['json']) {
-    dictJsonObjTW = `${dictJsonObjTW}\n${jsonObj['zh-TW']['json']}`;
+  if (jsonObj['zh-TW']['json'] || jsonObj['zh-TW']['json'] === "") {
+    if (jsonObj['zh-TW']['json']) dictJsonObjTW = `${dictJsonObjTW}\n  ${jsonObj['zh-TW']['json']}`;
+    if (jsonObj['zh-TW']['json'] === "") dictJsonObjTW = `${dictJsonObjTW}\n`;
   }
-  if (jsonObj['zh-CN']['json']) {
-    dictJsonObjCN = `${dictJsonObjCN}\n${jsonObj['zh-CN']['json']}`;
+  if (jsonObj['zh-CN']['json'] || jsonObj['zh-CN']['json'] === "") {
+    if (jsonObj['zh-CN']['json']) dictJsonObjCN = `${dictJsonObjCN}\n  ${jsonObj['zh-CN']['json']}`;
+    if (jsonObj['zh-CN']['json'] === "") dictJsonObjCN = `${dictJsonObjCN}\n`;
   }
-  if (jsonObj['en-US']['json']) {
-    dictJsonObjUS = `${dictJsonObjUS}\n${jsonObj['en-US']['json']}`;
+  if (jsonObj['en-US']['json'] || jsonObj['en-US']['json'] === "") {
+    if (jsonObj['en-US']['json']) dictJsonObjUS = `${dictJsonObjUS}\n  ${jsonObj['en-US']['json']}`;
+    if (jsonObj['en-US']['json'] === "") dictJsonObjUS = `${dictJsonObjUS}\n`;
   }
 })
 .on('done', (error) => {
