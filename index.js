@@ -19,22 +19,22 @@ csv()
 .fromFile(csvFilePath)
 .on('json', (jsonObj) => {
   if (jsonObj['zh-TW']['json'] || jsonObj['zh-TW']['json'] === "") {
-    if (jsonObj['zh-TW']['json']) dictJsonObjTW = `${dictJsonObjTW}\n  ${jsonObj['zh-TW']['json']}`;
+    if (jsonObj['zh-TW']['json']) dictJsonObjTW = `${dictJsonObjTW}\n  ${jsonObj['zh-TW']['json'].replace(/\"/g, "'")}`;
     if (jsonObj['zh-TW']['json'] === "") dictJsonObjTW = `${dictJsonObjTW}\n`;
   }
   if (jsonObj['zh-CN']['json'] || jsonObj['zh-CN']['json'] === "") {
-    if (jsonObj['zh-CN']['json']) dictJsonObjCN = `${dictJsonObjCN}\n  ${jsonObj['zh-CN']['json']}`;
+    if (jsonObj['zh-CN']['json']) dictJsonObjCN = `${dictJsonObjCN}\n  ${jsonObj['zh-CN']['json'].replace(/\"/g, "'")}`;
     if (jsonObj['zh-CN']['json'] === "") dictJsonObjCN = `${dictJsonObjCN}\n`;
   }
   if (jsonObj['en-US']['json'] || jsonObj['en-US']['json'] === "") {
-    if (jsonObj['en-US']['json']) dictJsonObjUS = `${dictJsonObjUS}\n  ${jsonObj['en-US']['json']}`;
+    if (jsonObj['en-US']['json']) dictJsonObjUS = `${dictJsonObjUS}\n  ${jsonObj['en-US']['json'].replace(/\"/g, "'")}`;
     if (jsonObj['en-US']['json'] === "") dictJsonObjUS = `${dictJsonObjUS}\n`;
   }
 })
 .on('done', (error) => {
-  const zhtw = JSON.parse(JSON.stringify(`export default {${dictJsonObjTW}\n}`));
-  const zhcn = JSON.parse(JSON.stringify(`export default {${dictJsonObjCN}\n}`));
-  const enus = JSON.parse(JSON.stringify(`export default {${dictJsonObjUS}\n}`));
+  const zhtw = JSON.parse(JSON.stringify(`export default {${dictJsonObjTW}\n};\n`));
+  const zhcn = JSON.parse(JSON.stringify(`export default {${dictJsonObjCN}\n};\n`));
+  const enus = JSON.parse(JSON.stringify(`export default {${dictJsonObjUS}\n};\n`));
 
   [
     { path: './locales/zh-TW.js', source: zhtw },
